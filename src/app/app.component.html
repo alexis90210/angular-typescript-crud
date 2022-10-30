@@ -1,0 +1,143 @@
+<style>
+  .is-bold {
+    font-weight: 500;
+  }
+  .h-flexible {
+    height: 100vh;
+    max-height: auto;
+  }
+</style>
+
+<div class="columns pt-6 is-centered has-background-light h-flexible">
+  <div class="column is-11">
+    <br />
+    <div class="has-text-centered py-4">
+      <img
+        src="https://angular.io/assets/images/logos/angular/angular.svg"
+        width="80px"
+        alt=""
+        srcset=""
+      />
+      <p class="is-size-4 is-bold">CRUD ANGULAR + BULMA</p>
+    </div>
+    <div class="columns mt-4">
+      <div class="column is-4">
+        <div class="box">
+          <!-- Nom -->
+          <div class="field mt-4">
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="text"
+                placeholder="Nom input"
+                [(ngModel)]="nom"
+              />
+              <span class="icon is-small is-left">
+                <i class="mdi mdi-account"></i>
+              </span>
+            </div>
+          </div>
+          <!-- Prenom -->
+          <div class="field mt-4">
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="text"
+                placeholder="Prenom input"
+                [(ngModel)]="prenom"
+              />
+              <span class="icon is-small is-left">
+                <i class="mdi mdi-account"></i>
+              </span>
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="field mt-4">
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="email"
+                placeholder="Email input"
+                [(ngModel)]="email"
+              />
+              <span class="icon is-small is-left">
+                <i class="mdi mdi-email"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="buttons mt-4">
+            <button
+              class="button is-link"
+              (click)="addElement()"
+              *ngIf="!editing"
+            >
+              Save
+            </button>
+            <button
+              class="button is-link"
+              (click)="saveEditElement()"
+              *ngIf="editing"
+            >
+              Edit
+            </button>
+            <button
+              class="button is-warning"
+              (click)="stopEditMode()"
+              *ngIf="editing"
+            >
+              New
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-8 px-5">
+        <div class="table-container box">
+          <button
+            *ngIf="toDoList.length > 0"
+            class="mb-2 button is-warning"
+            (click)="clearList()"
+          >
+            Delete All
+          </button>
+          <table class="table">
+            <thead>
+              <tr>
+                <td>No</td>
+                <td>Nom</td>
+                <td>Prenom</td>
+                <td>Email</td>
+                <td>Actions</td>
+              </tr>
+            </thead>
+            <tbody *ngIf="toDoList.length > 0">
+              <tr
+                *ngFor="let el of toDoList; let index = index"
+                class="is-size-7"
+              >
+                <td>{{ index + 1 }}</td>
+                <td>{{ el.nom }}</td>
+                <td>{{ el.prenom }}</td>
+                <td>{{ el.email }}</td>
+                <td>
+                  <div class="buttons">
+                    <button
+                      class="button is-danger"
+                      (click)="removeElement(el)"
+                    >
+                      <i class="mdi mdi-delete"></i>
+                    </button>
+                    <button class="button is-link" (click)="editElement(el)">
+                      <i class="mdi mdi-draw"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
